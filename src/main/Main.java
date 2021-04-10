@@ -2,6 +2,8 @@ package main;
 
 import controller.IJPaintController;
 import controller.JPaintController;
+import interact.MyMouseListener;
+import java.awt.event.MouseListener;
 import model.ShapeColor;
 import model.ShapeType;
 import model.persistence.ApplicationState;
@@ -19,6 +21,8 @@ import java.util.EnumMap;
 public class Main {
     public static void main(String[] args){
         PaintCanvasBase paintCanvas = new PaintCanvas();
+        MyMouseListener mouseListener = new MyMouseListener();
+        paintCanvas.addMouseListener(mouseListener);
         IGuiWindow guiWindow = new GuiWindow(paintCanvas);
         IUiModule uiModule = new Gui(guiWindow);
         ApplicationState appState = new ApplicationState(uiModule);
