@@ -1,12 +1,11 @@
 package interact;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.min;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import model.MouseMode;
 import model.ShapeColor;
 import view.interfaces.PaintCanvasBase;
 import model.persistence.ApplicationState;
@@ -53,18 +52,8 @@ public class MouseHandler implements MouseListener {
 
   private Point getOrigin(Point releasePoint) {
     int x, y;
-    if (pressPoint.x < releasePoint.x) {
-      x = pressPoint.x;
-    }
-    else {
-      x = releasePoint.x;
-    }
-    if (pressPoint.y < releasePoint.y) {
-      y = pressPoint.y;
-    }
-    else {
-      y = releasePoint.y;
-    }
+    x = min(pressPoint.x, releasePoint.x);
+    y = min(pressPoint.y, releasePoint.y);
     return new Point(x, y);
   }
 
@@ -79,5 +68,4 @@ public class MouseHandler implements MouseListener {
     g2D.setColor(color.getColor());
     g2D.fillRect(origin.x, origin.y, width, height);
   }
-
 }
