@@ -2,7 +2,7 @@ package main;
 
 import controller.IJPaintController;
 import controller.JPaintController;
-import interact.MyMouseListener;
+import interact.MouseHandler;
 import java.awt.event.MouseListener;
 import model.ShapeColor;
 import model.ShapeType;
@@ -21,12 +21,11 @@ import java.util.EnumMap;
 public class Main {
     public static void main(String[] args){
         PaintCanvasBase paintCanvas = new PaintCanvas();
-        MyMouseListener mouseListener = new MyMouseListener();
-        paintCanvas.addMouseListener(mouseListener);
         IGuiWindow guiWindow = new GuiWindow(paintCanvas);
         IUiModule uiModule = new Gui(guiWindow);
         ApplicationState appState = new ApplicationState(uiModule);
         IJPaintController controller = new JPaintController(uiModule, appState);
+        MouseHandler mouseHandler = new MouseHandler(paintCanvas, appState);
         controller.setup();
 
         // For example purposes only; remove all lines below from your final project.
