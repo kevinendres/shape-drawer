@@ -3,11 +3,8 @@ package interact;
 import static java.lang.Math.abs;
 import static java.lang.Math.min;
 
-import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import model.ShapeColor;
-import model.interfaces.ICommand;
 import shapes.CreateShapeCommand;
 import view.interfaces.PaintCanvasBase;
 import model.persistence.ApplicationState;

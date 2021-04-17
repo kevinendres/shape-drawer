@@ -3,7 +3,7 @@ package shapes;
 import interact.IUndoable;
 import interact.CommandHistory;
 import interact.Point;
-import model.interfaces.ICommand;
+import interact.ICommand;
 
 public class CreateShapeCommand implements ICommand, IUndoable {
   private Point pressPoint;
