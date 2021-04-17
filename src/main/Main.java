@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import model.ShapeColor;
 import model.ShapeType;
 import model.persistence.ApplicationState;
+import shapes.ShapeDrawer;
 import view.gui.Gui;
 import view.gui.GuiWindow;
 import view.gui.PaintCanvas;
@@ -26,6 +27,7 @@ public class Main {
         ApplicationState appState = new ApplicationState(uiModule);
         IJPaintController controller = new JPaintController(uiModule, appState);
         MouseHandler mouseHandler = new MouseHandler(paintCanvas, appState);
+        ShapeDrawer shapeDrawer = new ShapeDrawer(paintCanvas);
         controller.setup();
 
         // For example purposes only; remove all lines below from your final project.
