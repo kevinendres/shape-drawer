@@ -22,13 +22,12 @@ import java.util.EnumMap;
 public class Main {
     public static void main(String[] args){
         PaintCanvasBase paintCanvas = new PaintCanvas();
+        ShapeDrawer.paintCanvas = paintCanvas;
         IGuiWindow guiWindow = new GuiWindow(paintCanvas);
         IUiModule uiModule = new Gui(guiWindow);
         ApplicationState appState = new ApplicationState(uiModule);
         IJPaintController controller = new JPaintController(uiModule, appState);
         MouseHandler mouseHandler = new MouseHandler(paintCanvas, appState);
-        //ShapeDrawer shapeDrawer = new ShapeDrawer(paintCanvas);
-        ShapeDrawer.paintCanvas = paintCanvas;
         controller.setup();
 
         // For example purposes only; remove all lines below from your final project.

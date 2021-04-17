@@ -5,11 +5,7 @@ import java.awt.Graphics2D;
 import view.interfaces.PaintCanvasBase;
 
 public class ShapeDrawer {
-  private static PaintCanvasBase paintCanvas;
-
-  public ShapeDrawer(PaintCanvasBase paintCanvas) {
-    this.paintCanvas = paintCanvas;
-  }
+  public static PaintCanvasBase paintCanvas;
 
   private static void clearCanvas() {
     Graphics2D g2d = paintCanvas.getGraphics2D();
