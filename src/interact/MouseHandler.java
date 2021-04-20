@@ -10,14 +10,14 @@ import view.interfaces.PaintCanvasBase;
 import model.persistence.ApplicationState;
 
 public class MouseHandler implements MouseListener {
-  private final PaintCanvasBase paintCanvas;
+  private final CommandFactory commandFactory;
   private final ApplicationState appState;
   public Point pressPoint;
   public Point releasePoint;
 
   public MouseHandler(PaintCanvasBase paintCanvas, ApplicationState appState) {
-    this.paintCanvas = paintCanvas;
     this.appState = appState;
+    this.commandFactory = new CommandFactory(appState);
     this.pressPoint = new Point();
     this.releasePoint = new Point();
     paintCanvas.addMouseListener(this);
@@ -48,7 +48,7 @@ public class MouseHandler implements MouseListener {
   public void mouseReleased(MouseEvent e) {
     this.releasePoint.x = e.getX();
     this.releasePoint.y = e.getY();
-    ICommand command = new CreateShapeCommand(pressPoint, releasePoint);
+    ICommand command = commandFactory.createCommand(pressPoint, releasePoint);
     command.run();
   }
 }
