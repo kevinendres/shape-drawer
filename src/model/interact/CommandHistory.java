@@ -1,4 +1,4 @@
-package interact;
+package model.interact;
 
 import java.util.Stack;
 

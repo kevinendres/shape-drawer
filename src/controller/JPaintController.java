@@ -1,6 +1,6 @@
 package controller;
 
-import interact.CommandHistory;
+import model.interact.CommandHistory;
 import model.interfaces.IApplicationState;
 import view.EventName;
 import view.interfaces.IUiModule;

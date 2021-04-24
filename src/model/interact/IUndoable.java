@@ -1,4 +1,4 @@
-package interact;
+package model.interact;
 
 public interface IUndoable {
   void undo();

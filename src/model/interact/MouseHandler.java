@@ -1,11 +1,11 @@
-package interact;
+package model.interact;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.min;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import shapes.CreateShapeCommand;
+import model.Point;
 import view.interfaces.PaintCanvasBase;
 import model.persistence.ApplicationState;
 

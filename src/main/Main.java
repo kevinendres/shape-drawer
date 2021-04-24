@@ -2,10 +2,7 @@ package main;
 
 import controller.IJPaintController;
 import controller.JPaintController;
-import interact.MouseHandler;
-import java.awt.event.MouseListener;
-import model.ShapeColor;
-import model.ShapeType;
+import model.interact.MouseHandler;
 import model.persistence.ApplicationState;
 import shapes.ShapeDrawer;
 import view.gui.Gui;
@@ -14,10 +11,6 @@ import view.gui.PaintCanvas;
 import view.interfaces.IGuiWindow;
 import view.interfaces.PaintCanvasBase;
 import view.interfaces.IUiModule;
-
-import java.awt.*;
-import java.util.Collection;
-import java.util.EnumMap;
 
 public class Main {
     public static void main(String[] args){
