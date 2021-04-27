@@ -7,6 +7,7 @@ import model.Point;
 import model.ShapeColor;
 import model.ShapeShadingType;
 import model.ShapeType;
+import view.gui.PaintCanvas;
 import view.interfaces.PaintCanvasBase;
 
 public class Shape implements IShape {
@@ -36,18 +37,22 @@ public class Shape implements IShape {
     drawBehavior.draw(paintCanvas, origin, width, height, primaryColor, secondaryColor, shapeShadingType);
   }
 
-  private Point getOrigin(Point pressPoint, Point releasePoint) {
+  public void select(PaintCanvasBase paintCanvas) {
+    drawBehavior.select(paintCanvas, origin, width, height);
+  }
+
+  protected static Point getOrigin(Point pressPoint, Point releasePoint) {
     int x, y;
     x = min(pressPoint.x, releasePoint.x);
     y = min(pressPoint.y, releasePoint.y);
     return new Point(x, y);
   }
 
-  private int getHeight(Point pressPoint, Point releasePoint) {
+  protected static int getHeight(Point pressPoint, Point releasePoint) {
     return abs(releasePoint.y - pressPoint.y);
   }
 
-  private int getWidth(Point pressPoint, Point releasePoint) {
+  protected static int getWidth(Point pressPoint, Point releasePoint) {
     return abs(releasePoint.x - pressPoint.x);
   }
 }

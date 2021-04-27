@@ -16,7 +16,10 @@ public class ShapeDrawer {
   public static void drawAllShapes() {
     clearCanvas();
     for (IShape shape : ShapeList.shapeList) {
-     shape.draw(paintCanvas);
+      shape.draw(paintCanvas);
+    }
+    for (IShape shape : SelectedShapesList.shapeList) {
+      shape.select(paintCanvas);
     }
   }
 }
