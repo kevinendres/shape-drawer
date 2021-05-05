@@ -1,4 +1,4 @@
-package shapes;
+package shapes.interfaces;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

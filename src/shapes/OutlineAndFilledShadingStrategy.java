@@ -3,6 +3,7 @@ package shapes;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
+import shapes.interfaces.IShadingTypeStrategy;
 
 public class OutlineAndFilledShadingStrategy implements IShadingTypeStrategy {
 

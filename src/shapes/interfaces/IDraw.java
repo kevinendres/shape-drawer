@@ -1,9 +1,7 @@
-package shapes;
+package shapes.interfaces;
 
 import model.Point;
 import model.ShapeColor;
-import model.ShapeShadingType;
-import model.ShapeType;
 import view.interfaces.PaintCanvasBase;
 
 public interface IDraw {

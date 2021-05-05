@@ -6,6 +6,7 @@ import model.Point;
 import model.interact.CommandHistory;
 import model.interact.ICommand;
 import model.interact.IUndoable;
+import shapes.interfaces.IShape;
 
 public class MoveShapesCommand implements ICommand, IUndoable {
   private Point pressPoint;

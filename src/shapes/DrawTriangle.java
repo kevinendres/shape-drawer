@@ -4,13 +4,12 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
-import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Stroke;
 import model.Point;
 import model.ShapeColor;
-import model.ShapeShadingType;
-import model.ShapeType;
+import shapes.interfaces.IDraw;
+import shapes.interfaces.IShadingTypeStrategy;
 import view.interfaces.PaintCanvasBase;
 
 public class DrawTriangle implements IDraw {

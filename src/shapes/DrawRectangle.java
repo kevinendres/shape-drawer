@@ -8,11 +8,11 @@ import model.Point;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import model.ShapeColor;
-import model.ShapeShadingType;
-import model.ShapeType;
+import shapes.interfaces.IDraw;
+import shapes.interfaces.IShadingTypeStrategy;
 import view.interfaces.PaintCanvasBase;
 
-public class DrawRectangle implements IDraw{
+public class DrawRectangle implements IDraw {
   @Override
   public void draw(PaintCanvasBase paintCanvas, Point origin, int width, int height,
       ShapeColor primaryColor, ShapeColor secondaryColor, IShadingTypeStrategy shadingStrategy) {

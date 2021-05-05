@@ -2,6 +2,7 @@ package shapes;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import shapes.interfaces.IShape;
 import view.interfaces.PaintCanvasBase;
 
 public class ShapeDrawer {

@@ -8,6 +8,8 @@ import java.awt.Stroke;
 import java.awt.geom.Ellipse2D.Float;
 import model.Point;
 import model.ShapeColor;
+import shapes.interfaces.IDraw;
+import shapes.interfaces.IShadingTypeStrategy;
 import view.interfaces.PaintCanvasBase;
 
 public class DrawEllipse implements IDraw {

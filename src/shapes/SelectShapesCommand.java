@@ -1,10 +1,8 @@
 package shapes;
 
-import java.util.ArrayList;
-import java.util.List;
 import model.Point;
 import model.interact.ICommand;
-import model.interact.IUndoable;
+import shapes.interfaces.IShape;
 
 public class SelectShapesCommand implements ICommand {
   private Point upperLeft;
@@ -43,25 +41,22 @@ public class SelectShapesCommand implements ICommand {
     int selectYMin = upperLeft.y;
     int selectYMax = upperLeft.y + height;
 
-    if ((shapeXMin >= selectXMin && shapeXMin <= selectXMax) ||
-        (shapeXMax >= selectXMin && shapeXMax <= selectXMax)) {
-     if ((shapeYMin >= selectYMin && shapeYMin <= selectYMax) ||
-         (shapeYMax >= selectYMin && shapeYMax <= selectYMax)) {
+    boolean shapeXinSelectX = (shapeXMin >= selectXMin && shapeXMin <= selectXMax) ||
+        (shapeXMax >= selectXMin && shapeXMax <= selectXMax);
+    boolean shapeYinSelectY = (shapeYMin >= selectYMin && shapeYMin <= selectYMax) ||
+        (shapeYMax >= selectYMin && shapeYMax <= selectYMax);
+    boolean selectYinShapeY = (selectYMin >= shapeYMin && selectYMin <= shapeYMax) ||
+        (selectYMax >= shapeYMin && selectYMax <= shapeYMax);
+    boolean selectXinShapeX = (selectXMin >= shapeXMin && selectXMin <= shapeXMax) ||
+        (selectXMax >= shapeXMin && selectXMax <= shapeXMax);
+
+    if (shapeXinSelectX || selectXinShapeX) {
+     if  (selectYinShapeY || shapeYinSelectY) {
        return true;
      }
-     if ((selectYMin >= shapeYMin && selectYMin <= shapeYMax) ||
-          (selectYMax >= shapeYMin && selectYMax <= shapeYMax)) {
-        return true;
+     else {
+       return false;
      }
-     return false;
-    }
-    else if ((selectXMin >= shapeXMin && selectXMin <= shapeXMax) ||
-        (selectXMax >= shapeXMin && selectXMax <= shapeXMax)) {
-      if ((selectYMin >= shapeYMin && selectYMin <= shapeYMax) ||
-          (selectYMax >= shapeYMin && selectYMax <= shapeYMax)) {
-        return true;
-      }
-      return false;
     }
    else {
      return false;

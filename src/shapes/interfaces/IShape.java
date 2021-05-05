@@ -1,4 +1,4 @@
-package shapes;
+package shapes.interfaces;
 
 import view.interfaces.PaintCanvasBase;
 
