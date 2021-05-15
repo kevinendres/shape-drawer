@@ -1,6 +1,5 @@
 package model.interact;
 
-import model.MouseMode;
 import model.Point;
 import model.persistence.ApplicationState;
 import shapes.CreateShapeCommand;
