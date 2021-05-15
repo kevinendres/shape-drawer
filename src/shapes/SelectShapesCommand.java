@@ -32,10 +32,10 @@ public class SelectShapesCommand implements ICommand {
   }
 
   private boolean selectionContainsShape(Shape shape) {
-    int shapeXMin = shape.origin.x;
-    int shapeXMax = shape.origin.x + shape.width;
-    int shapeYMin = shape.origin.y;
-    int shapeYMax = shape.origin.y + shape.height;
+    int shapeXMin = shape.upperLeft.x;
+    int shapeXMax = shape.upperLeft.x + shape.width;
+    int shapeYMin = shape.upperLeft.y;
+    int shapeYMax = shape.upperLeft.y + shape.height;
     int selectXMin = upperLeft.x;
     int selectXMax = upperLeft.x + width;
     int selectYMin = upperLeft.y;
