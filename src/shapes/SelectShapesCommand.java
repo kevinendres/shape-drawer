@@ -10,7 +10,7 @@ public class SelectShapesCommand implements ICommand {
   private int width;
 
   public SelectShapesCommand(Point pressPoint, Point releasePoint) {
-    this.upperLeft = Shape.getOrigin(pressPoint, releasePoint);
+    this.upperLeft = Shape.getUpperLeft(pressPoint, releasePoint);
     this.height = Shape.getHeight(pressPoint, releasePoint);
     this.width = Shape.getWidth(pressPoint, releasePoint);
   }

@@ -1,5 +1,9 @@
 package shapes;
 
+import static shapes.Shape.getHeight;
+import static shapes.Shape.getUpperLeft;
+import static shapes.Shape.getWidth;
+
 import model.ShapeColor;
 import model.ShapeShadingType;
 import model.ShapeType;
@@ -36,10 +40,13 @@ public class CreateShapeCommand implements ICommand, IUndoable {
 
   @Override
   public void run() {
-    IDraw drawBehavior = createDrawBehavior();
-    IShadingTypeStrategy shadingTypeStrategy = createShadingStrategy();
-    shape = new Shape(pressPoint, releasePoint, primaryColor, secondaryColor, shadingTypeStrategy, shapeType,
-        drawBehavior);
+    IDraw drawBehavior = createDrawBehavior(shapeType);
+    IShadingTypeStrategy shadingTypeStrategy = createShadingStrategy(shapeShadingType);
+    Point upperLeft = getUpperLeft(pressPoint, releasePoint);
+    int height = getHeight(pressPoint, releasePoint);
+    int width = getWidth(pressPoint, releasePoint);
+    shape = new Shape(upperLeft, width, height, primaryColor, secondaryColor, shapeShadingType,
+        shadingTypeStrategy, shapeType, drawBehavior);
     ShapeList.add(shape);
     CommandHistory.add(this);
   }
@@ -54,7 +61,7 @@ public class CreateShapeCommand implements ICommand, IUndoable {
     ShapeList.add(shape);
   }
 
-  private IDraw createDrawBehavior() {
+  public static IDraw createDrawBehavior(ShapeType shapeType) {
     switch(shapeType) {
       case RECTANGLE:
         return DrawStaticFactory.createRectangle();
@@ -67,7 +74,7 @@ public class CreateShapeCommand implements ICommand, IUndoable {
     }
   }
 
-  private IShadingTypeStrategy createShadingStrategy() {
+  public static IShadingTypeStrategy createShadingStrategy(ShapeShadingType shapeShadingType) {
     switch (shapeShadingType) {
       case OUTLINE:
         return ShadingStrategyStaticFactory.createOutlineStrategy();

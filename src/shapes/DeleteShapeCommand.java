@@ -3,25 +3,24 @@ package shapes;
 import java.util.ArrayList;
 import java.util.List;
 import model.interact.CommandHistory;
-import model.interact.ICommand;
 import model.interact.IUndoable;
 import shapes.interfaces.IShape;
 
-public class DeleteShapeCommand implements ICommand, IUndoable {
-  private final List<IShape> deletedShapeList = new ArrayList<>();
+public class DeleteShapeCommand implements IUndoable {
+  private static final List<IShape> deletedShapeList = new ArrayList<>();
 
-  @Override
-  public void run() {
-    deleteSelectedShapes();
-    CommandHistory.add(this);
+  public static void run() {
+    DeleteShapeCommand command = new DeleteShapeCommand();
+    command.deleteShapes();
   }
 
-  private void deleteSelectedShapes() {
+  public void deleteShapes() {
     for (IShape shape : SelectedShapesList.shapeList) {
       ShapeList.remove(shape);
       deletedShapeList.add(shape);
     }
     SelectedShapesList.clear();
+    CommandHistory.add(this);
   }
 
   @Override

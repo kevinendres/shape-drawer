@@ -18,18 +18,20 @@ public class Shape implements IShape {
   protected int width;
   protected ShapeColor primaryColor;
   protected ShapeColor secondaryColor;
+  protected ShapeShadingType shapeShadingType;
   protected IShadingTypeStrategy shapeShadingStrategy;
   protected ShapeType shapeType;
   protected IDraw drawBehavior;
 
-  public Shape(Point pressPoint, Point releasePoint, ShapeColor primaryColor, ShapeColor secondaryColor,
-      IShadingTypeStrategy shapeShadingStrategy, ShapeType shapeType, IDraw drawBehavior) {
-    this.upperLeft = getOrigin(pressPoint, releasePoint);
-    this.height = getHeight(pressPoint, releasePoint);
-    this.width = getWidth(pressPoint, releasePoint);
+  public Shape(Point upperLeft, int width, int height, ShapeColor primaryColor, ShapeColor secondaryColor,
+      ShapeShadingType shapeShadingType, IShadingTypeStrategy shapeShadingStrategy, ShapeType shapeType, IDraw drawBehavior) {
+    this.upperLeft = upperLeft;
+    this.width = width;
+    this.height = height;
     this.primaryColor = primaryColor;
     this.secondaryColor = secondaryColor;
     this.shapeType = shapeType;
+    this.shapeShadingType = shapeShadingType;
     this.shapeShadingStrategy = shapeShadingStrategy;
     this.drawBehavior = drawBehavior;
   }
@@ -41,8 +43,6 @@ public class Shape implements IShape {
     this.primaryColor = otherShape.primaryColor;
     this.secondaryColor = otherShape.secondaryColor;
     this.shapeType = otherShape.shapeType;
-    this.shapeShadingStrategy = otherShape.shapeShadingStrategy;
-    this.drawBehavior = otherShape.drawBehavior;
   }
 
   @Override
@@ -54,7 +54,7 @@ public class Shape implements IShape {
     drawBehavior.select(paintCanvas, upperLeft, width, height);
   }
 
-  protected static Point getOrigin(Point pressPoint, Point releasePoint) {
+  protected static Point getUpperLeft(Point pressPoint, Point releasePoint) {
     int x, y;
     x = min(pressPoint.x, releasePoint.x);
     y = min(pressPoint.y, releasePoint.y);

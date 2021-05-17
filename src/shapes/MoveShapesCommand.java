@@ -32,13 +32,13 @@ public class MoveShapesCommand implements ICommand, IUndoable {
   }
 
   private void transform(Shape shape) {
-    shape.origin.x += deltaX;
-    shape.origin.y += deltaY;
+    shape.upperLeft.x += deltaX;
+    shape.upperLeft.y += deltaY;
   }
 
   private void untransform(Shape shape) {
-    shape.origin.x -= deltaX;
-    shape.origin.y -= deltaY;
+    shape.upperLeft.x -= deltaX;
+    shape.upperLeft.y -= deltaY;
   }
 
   private int computeDeltaX() {
