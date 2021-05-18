@@ -3,6 +3,7 @@ package controller;
 import model.interact.CommandHistory;
 import model.interfaces.IApplicationState;
 import shapes.DeleteShapeCommand;
+import shapes.CopyShapeCommand;
 import shapes.PasteShapeCommand;
 import view.EventName;
 import view.interfaces.IUiModule;
@@ -31,7 +32,7 @@ public class JPaintController implements IJPaintController {
             applicationState::setActiveStartAndEndPointMode);
         uiModule.addEvent(EventName.UNDO, CommandHistory::undo);
         uiModule.addEvent(EventName.REDO, CommandHistory::redo);
-        uiModule.addEvent(EventName.COPY, shapes.CopyShapeCommand::copyShapes);
+        uiModule.addEvent(EventName.COPY, CopyShapeCommand::copyShapes);
         uiModule.addEvent(EventName.DELETE, DeleteShapeCommand::run);
         uiModule.addEvent(EventName.PASTE, PasteShapeCommand::run);
     }

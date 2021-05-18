@@ -1,4 +1,4 @@
-package shapes;
+package shapes.drawbehaviors;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -9,19 +9,26 @@ import java.awt.geom.Ellipse2D.Float;
 import model.Point;
 import model.ShapeColor;
 import shapes.interfaces.IDraw;
+import shapes.interfaces.IDrawSelectionDecorator;
 import shapes.interfaces.IShadingTypeStrategy;
 import view.interfaces.PaintCanvasBase;
 
-public class DrawEllipse implements IDraw {
+public class EllipseSelectionDecorator implements IDrawSelectionDecorator {
+  private final IDraw originalDrawBehavior;
 
-  @Override
-  public void draw(PaintCanvasBase paintCanvas, Point origin, int width, int height,
-      ShapeColor primaryColor, ShapeColor secondaryColor, IShadingTypeStrategy shadingStrategy) {
-    Graphics2D g2d = paintCanvas.getGraphics2D();
-    Shape ellipse = new Float(origin.x, origin.y, width, height);
-    shadingStrategy.shade(g2d, ellipse, primaryColor.getColor(), secondaryColor.getColor());
+  public EllipseSelectionDecorator(IDraw originalDrawBehavior) {
+    this.originalDrawBehavior = originalDrawBehavior;
   }
 
+  @Override
+  public void draw(PaintCanvasBase paintCanvas, Point upperLeft, int width, int height,
+      ShapeColor primaryColor, ShapeColor secondaryColor, IShadingTypeStrategy shadingStrategy) {
+    this.originalDrawBehavior.draw(paintCanvas, upperLeft, width, height, primaryColor, secondaryColor,
+        shadingStrategy);
+    this.select(paintCanvas, upperLeft, width, height);
+  }
+
+  @Override
   public void select(PaintCanvasBase paintCanvas, Point upperLeft, int width, int height) {
     Graphics2D g2d = paintCanvas.getGraphics2D();
     Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);

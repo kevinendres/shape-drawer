@@ -1,6 +1,5 @@
-package shapes;
+package shapes.drawbehaviors;
 
-import model.ShapeShadingType;
 import shapes.interfaces.IShadingTypeStrategy;
 
 public class ShadingStrategyStaticFactory {

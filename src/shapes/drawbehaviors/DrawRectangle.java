@@ -1,4 +1,4 @@
-package shapes;
+package shapes.drawbehaviors;
 
 import java.awt.BasicStroke;
 import java.awt.Rectangle;

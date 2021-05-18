@@ -1,9 +1,5 @@
 package shapes;
 
-import static shapes.Shape.getHeight;
-import static shapes.Shape.getUpperLeft;
-import static shapes.Shape.getWidth;
-
 import model.ShapeColor;
 import model.ShapeShadingType;
 import model.ShapeType;
@@ -11,10 +7,8 @@ import model.interact.IUndoable;
 import model.interact.CommandHistory;
 import model.Point;
 import model.interact.ICommand;
-import shapes.DrawStaticFactory;
-import shapes.ShadingStrategyStaticFactory;
-import shapes.Shape;
-import shapes.ShapeList;
+import shapes.drawbehaviors.ShadingStrategyStaticFactory;
+import shapes.drawbehaviors.DrawStaticFactory;
 import shapes.interfaces.IDraw;
 import shapes.interfaces.IShadingTypeStrategy;
 import shapes.interfaces.IShape;
@@ -42,9 +36,9 @@ public class CreateShapeCommand implements ICommand, IUndoable {
   public void run() {
     IDraw drawBehavior = createDrawBehavior(shapeType);
     IShadingTypeStrategy shadingTypeStrategy = createShadingStrategy(shapeShadingType);
-    Point upperLeft = getUpperLeft(pressPoint, releasePoint);
-    int height = getHeight(pressPoint, releasePoint);
-    int width = getWidth(pressPoint, releasePoint);
+    Point upperLeft = Shape.getUpperLeft(pressPoint, releasePoint);
+    int height = Shape.getHeight(pressPoint, releasePoint);
+    int width = Shape.getWidth(pressPoint, releasePoint);
     shape = new Shape(upperLeft, width, height, primaryColor, secondaryColor, shapeShadingType,
         shadingTypeStrategy, shapeType, drawBehavior);
     ShapeList.add(shape);

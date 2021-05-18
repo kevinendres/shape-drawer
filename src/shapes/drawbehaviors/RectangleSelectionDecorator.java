@@ -1,4 +1,4 @@
-package shapes;
+package shapes.drawbehaviors;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -32,10 +32,5 @@ public class RectangleSelectionDecorator implements IDrawSelectionDecorator {
     g2d.setStroke(stroke);
     g2d.setColor(Color.BLACK);
     g2d.drawRect(upperLeft.x - 5, upperLeft.y - 5, width + 10, height + 10);
-  }
-
-  @Override
-  public IDraw getOriginalDrawBehavior() {
-    return this.originalDrawBehavior;
   }
 }

@@ -55,8 +55,4 @@ public class Shape implements IShape {
   protected static int getWidth(Point pressPoint, Point releasePoint) {
     return abs(releasePoint.x - pressPoint.x);
   }
-
-  protected void setDrawBehavior(IDraw drawBehavior) {
-    this.drawBehavior = drawBehavior;
-  }
 }

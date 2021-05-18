@@ -1,4 +1,4 @@
-package shapes;
+package shapes.drawbehaviors;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
