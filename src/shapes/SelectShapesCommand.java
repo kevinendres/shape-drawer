@@ -1,13 +1,15 @@
 package shapes;
 
 import model.Point;
+import model.ShapeType;
 import model.interact.ICommand;
+import shapes.interfaces.IDraw;
 import shapes.interfaces.IShape;
 
 public class SelectShapesCommand implements ICommand {
-  private Point upperLeft;
-  private int height;
-  private int width;
+  private final Point upperLeft;
+  private final int height;
+  private final int width;
 
   public SelectShapesCommand(Point pressPoint, Point releasePoint) {
     this.upperLeft = Shape.getUpperLeft(pressPoint, releasePoint);
@@ -15,11 +17,11 @@ public class SelectShapesCommand implements ICommand {
     this.width = Shape.getWidth(pressPoint, releasePoint);
   }
 
-
   @Override
   public void run() {
     emptySelectedShapesList();
     selectShapes();
+    applyDecorators();
     ShapeDrawer.drawAllShapes();
   }
 
@@ -28,6 +30,27 @@ public class SelectShapesCommand implements ICommand {
       if (selectionContainsShape((Shape)shape)) {
         SelectedShapesList.add(shape);
       }
+    }
+  }
+
+  private void applyDecorators() {
+    for (IShape shape : SelectedShapesList.shapeList) {
+      ((Shape)shape).drawBehavior = createDecorator(((Shape)shape).shapeType, ((Shape)shape).drawBehavior);
+    }
+  }
+
+  private void removeDecorators() {
+    for (IShape shape : SelectedShapesList.shapeList) {
+      ((Shape)shape).drawBehavior = CreateShapeCommand.createDrawBehavior(((Shape)shape).shapeType);
+    }
+  }
+
+  private IDraw createDecorator(ShapeType shapeType, IDraw drawBehavior) {
+    switch (shapeType) {
+      case ELLIPSE: return new EllipseSelectionDecorator(drawBehavior);
+      case TRIANGLE: return new TriangleSelectionDecorator(drawBehavior);
+      case RECTANGLE: return new RectangleSelectionDecorator(drawBehavior);
+      default: return null;
     }
   }
 
@@ -51,12 +74,7 @@ public class SelectShapesCommand implements ICommand {
         (selectXMax >= shapeXMin && selectXMax <= shapeXMax);
 
     if (shapeXinSelectX || selectXinShapeX) {
-     if  (selectYinShapeY || shapeYinSelectY) {
-       return true;
-     }
-     else {
-       return false;
-     }
+      return selectYinShapeY || shapeYinSelectY;
     }
    else {
      return false;
@@ -64,6 +82,7 @@ public class SelectShapesCommand implements ICommand {
   }
 
   private void emptySelectedShapesList() {
+    removeDecorators();
     SelectedShapesList.clear();
   }
 }

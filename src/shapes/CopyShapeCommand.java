@@ -4,7 +4,6 @@ import model.Point;
 import shapes.interfaces.IDraw;
 import shapes.interfaces.IShadingTypeStrategy;
 import shapes.interfaces.IShape;
-import shapes.SelectedShapesList;
 
 public class CopyShapeCommand {
   public static void copyShapes() {

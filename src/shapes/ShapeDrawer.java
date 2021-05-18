@@ -19,8 +19,5 @@ public class ShapeDrawer {
     for (IShape shape : ShapeList.shapeList) {
       shape.draw(paintCanvas);
     }
-    for (IShape shape : SelectedShapesList.shapeList) {
-      shape.select(paintCanvas);
-    }
   }
 }

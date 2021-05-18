@@ -3,7 +3,6 @@ package shapes;
 import java.util.ArrayList;
 import java.util.List;
 import model.interact.CommandHistory;
-import model.interact.ICommand;
 import model.interact.IUndoable;
 import shapes.interfaces.IShape;
 

@@ -36,22 +36,9 @@ public class Shape implements IShape {
     this.drawBehavior = drawBehavior;
   }
 
-  public Shape(Shape otherShape) {
-    this.upperLeft = otherShape.upperLeft;
-    this.height = otherShape.height;
-    this.width = otherShape.width;
-    this.primaryColor = otherShape.primaryColor;
-    this.secondaryColor = otherShape.secondaryColor;
-    this.shapeType = otherShape.shapeType;
-  }
-
   @Override
   public void draw(PaintCanvasBase paintCanvas) {
     drawBehavior.draw(paintCanvas, upperLeft, width, height, primaryColor, secondaryColor, shapeShadingStrategy);
-  }
-
-  public void select(PaintCanvasBase paintCanvas) {
-    drawBehavior.select(paintCanvas, upperLeft, width, height);
   }
 
   protected static Point getUpperLeft(Point pressPoint, Point releasePoint) {
@@ -67,5 +54,9 @@ public class Shape implements IShape {
 
   protected static int getWidth(Point pressPoint, Point releasePoint) {
     return abs(releasePoint.x - pressPoint.x);
+  }
+
+  protected void setDrawBehavior(IDraw drawBehavior) {
+    this.drawBehavior = drawBehavior;
   }
 }
