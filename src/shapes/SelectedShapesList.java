@@ -11,6 +11,8 @@ public class SelectedShapesList {
     shapeList.add(shape);
   }
 
+  public static void remove(IShape shape) { shapeList.remove(shape); }
+
   public static void clear() {
     shapeList.clear();
   }
