@@ -22,18 +22,16 @@ public class GroupShapesCommand implements IUndoable {
   private void groupShapes() {
     GroupShapeComposite group = new GroupShapeComposite();
     for (IShape shape : SelectedShapesList.shapeList) {
+      groupedShapes.add(shape);
       group.addChild(shape);
-      SelectedShapesList.remove(shape);
       ShapeList.remove(shape);
     }
     group.setUpperLeft();
     group.setHeightAndWidth();
-    ShapeList.add(group);
+    SelectShapesCommand.emptySelectedShapesList();
     SelectedShapesList.add(group);
-  }
-
-  private void createGroupDrawBehavior(GroupShapeComposite group) {
-
+    SelectShapesCommand.applyDecorators();
+    ShapeList.add(group);
   }
 
   @Override

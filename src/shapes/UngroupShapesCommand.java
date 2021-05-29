@@ -30,6 +30,7 @@ public class UngroupShapesCommand implements IUndoable {
     }
     for (IShape shape : ungroupedShapes) {
       ShapeList.add(shape);
+      SelectedShapesList.add(shape);
     }
   }
 

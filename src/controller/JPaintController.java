@@ -6,6 +6,7 @@ import shapes.DeleteShapeCommand;
 import shapes.CopyShapeCommand;
 import shapes.GroupShapesCommand;
 import shapes.PasteShapeCommand;
+import shapes.UngroupShapesCommand;
 import view.EventName;
 import view.interfaces.IUiModule;
 
@@ -37,6 +38,6 @@ public class JPaintController implements IJPaintController {
         uiModule.addEvent(EventName.DELETE, DeleteShapeCommand::run);
         uiModule.addEvent(EventName.PASTE, PasteShapeCommand::run);
         uiModule.addEvent(EventName.GROUP, GroupShapesCommand::run);
-        uiModule.addEvent(EventName.UNGROUP, GroupShapesCommand::run);
+        uiModule.addEvent(EventName.UNGROUP, UngroupShapesCommand::run);
     }
 }

@@ -24,7 +24,7 @@ public class MoveShapesCommand implements ICommand, IUndoable {
   @Override
   public void run() {
     for (IShape shape : SelectedShapesList.shapeList) {
-      ((Shape) shape).transform(this.deltaX, this.deltaY);
+      shape.transform(this.deltaX, this.deltaY);
       this.movedShapesList.add(shape);
     }
     ShapeDrawer.drawAllShapes();
@@ -42,7 +42,7 @@ public class MoveShapesCommand implements ICommand, IUndoable {
   @Override
   public void undo() {
     for (IShape shape : this.movedShapesList) {
-      ((Shape) shape).untransform(this.deltaX, this.deltaY);
+      shape.transform(-(this.deltaX), -(this.deltaY));
     }
     ShapeDrawer.drawAllShapes();
   }
@@ -50,7 +50,7 @@ public class MoveShapesCommand implements ICommand, IUndoable {
   @Override
   public void redo() {
     for (IShape shape : this.movedShapesList) {
-      ((Shape) shape).transform(this.deltaX, this.deltaY);
+      shape.transform(this.deltaX, this.deltaY);
     }
     ShapeDrawer.drawAllShapes();
   }

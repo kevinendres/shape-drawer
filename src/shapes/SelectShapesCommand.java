@@ -34,25 +34,27 @@ public class SelectShapesCommand implements ICommand {
 
   private void selectShapes() {
     for (IShape shape : ShapeList.shapeList) {
-      if (selectionContainsShape((Shape)shape)) {
+      if (selectionContainsShape(shape)) {
         SelectedShapesList.add(shape);
       }
     }
   }
 
-  protected void applyDecorators() {
+  protected static void applyDecorators() {
     for (IShape shape : SelectedShapesList.shapeList) {
-      ((Shape)shape).drawBehavior = createDecorator(((Shape)shape).shapeType, ((Shape)shape).drawBehavior);
+      IDraw newBehavior = createDecorator(shape.getShapeType(), shape.getDrawBehavior());
+      shape.setDrawBehavior(newBehavior);
     }
   }
 
-  private void removeDecorators() {
+  protected static void removeDecorators() {
     for (IShape shape : SelectedShapesList.shapeList) {
-      ((Shape)shape).drawBehavior = ((IDrawSelectionDecorator)((Shape)shape).drawBehavior).getOriginalDrawBehavior();
+      IDraw oldBehavior = ((IDrawSelectionDecorator)shape.getDrawBehavior()).getOriginalDrawBehavior();
+      shape.setDrawBehavior(oldBehavior);
     }
   }
 
-  private IDraw createDecorator(ShapeType shapeType, IDraw drawBehavior) {
+  protected static IDraw createDecorator(ShapeType shapeType, IDraw drawBehavior) {
     switch (shapeType) {
       case ELLIPSE: return new EllipseSelectionDecorator(drawBehavior);
       case TRIANGLE: return new TriangleSelectionDecorator(drawBehavior);
@@ -61,11 +63,11 @@ public class SelectShapesCommand implements ICommand {
     }
   }
 
-  private boolean selectionContainsShape(Shape shape) {
-    int shapeXMin = shape.upperLeft.x;
-    int shapeXMax = shape.upperLeft.x + shape.width;
-    int shapeYMin = shape.upperLeft.y;
-    int shapeYMax = shape.upperLeft.y + shape.height;
+  private boolean selectionContainsShape(IShape shape) {
+    int shapeXMin = shape.getUpperLeft().x;
+    int shapeXMax = shape.getUpperLeft().x + shape.getWidth();
+    int shapeYMin = shape.getUpperLeft().y;
+    int shapeYMax = shape.getUpperLeft().y + shape.getHeight();
     int selectXMin = upperLeft.x;
     int selectXMax = upperLeft.x + width;
     int selectYMin = upperLeft.y;
@@ -88,7 +90,7 @@ public class SelectShapesCommand implements ICommand {
    }
   }
 
-  private void emptySelectedShapesList() {
+  protected static void emptySelectedShapesList() {
     removeDecorators();
     SelectedShapesList.clear();
   }

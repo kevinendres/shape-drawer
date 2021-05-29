@@ -36,9 +36,9 @@ public class CreateShapeCommand implements ICommand, IUndoable {
   public void run() {
     IDraw drawBehavior = createDrawBehavior(shapeType);
     IShadingTypeStrategy shadingTypeStrategy = createShadingStrategy(shapeShadingType);
-    Point upperLeft = Shape.getUpperLeft(pressPoint, releasePoint);
-    int height = Shape.getHeight(pressPoint, releasePoint);
-    int width = Shape.getWidth(pressPoint, releasePoint);
+    Point upperLeft = Shape.findUpperLeft(pressPoint, releasePoint);
+    int height = Shape.findHeight(pressPoint, releasePoint);
+    int width = Shape.findWidth(pressPoint, releasePoint);
     shape = new Shape(upperLeft, width, height, primaryColor, secondaryColor, shapeShadingType,
         shadingTypeStrategy, shapeType, drawBehavior);
     ShapeList.add(shape);

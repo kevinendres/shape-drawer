@@ -41,28 +41,54 @@ public class Shape implements IShape {
     drawBehavior.draw(paintCanvas, upperLeft, width, height, primaryColor, secondaryColor, shapeShadingStrategy);
   }
 
-  protected static Point getUpperLeft(Point pressPoint, Point releasePoint) {
+  protected static Point findUpperLeft(Point pressPoint, Point releasePoint) {
     int x, y;
     x = min(pressPoint.x, releasePoint.x);
     y = min(pressPoint.y, releasePoint.y);
     return new Point(x, y);
   }
 
-  protected static int getHeight(Point pressPoint, Point releasePoint) {
+  protected static int findHeight(Point pressPoint, Point releasePoint) {
     return abs(releasePoint.y - pressPoint.y);
   }
 
-  protected static int getWidth(Point pressPoint, Point releasePoint) {
+  protected static int findWidth(Point pressPoint, Point releasePoint) {
     return abs(releasePoint.x - pressPoint.x);
   }
 
-  protected void transform(int deltaX, int deltaY) {
+  @Override
+  public void transform(int deltaX, int deltaY) {
     this.upperLeft.x += deltaX;
     this.upperLeft.y += deltaY;
   }
 
-  protected void untransform(int deltaX, int deltaY) {
-    this.upperLeft.x -= deltaX;
-    this.upperLeft.y -= deltaY;
+  @Override
+  public IDraw getDrawBehavior() {
+    return drawBehavior;
+  }
+
+  @Override
+  public void setDrawBehavior(IDraw drawBehavior) {
+    this.drawBehavior = drawBehavior;
+  }
+
+  @Override
+  public int getHeight() {
+    return height;
+  }
+
+  @Override
+  public int getWidth() {
+    return width;
+  }
+
+  @Override
+  public Point getUpperLeft() {
+    return upperLeft;
+  }
+
+  @Override
+  public ShapeType getShapeType() {
+    return shapeType;
   }
 }
