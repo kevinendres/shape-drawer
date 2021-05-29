@@ -28,7 +28,6 @@ public class SelectShapesCommand implements ICommand {
   public void run() {
     emptySelectedShapesList();
     selectShapes();
-    applyDecorators();
     ShapeDrawer.drawAllShapes();
   }
 
@@ -40,18 +39,14 @@ public class SelectShapesCommand implements ICommand {
     }
   }
 
-  protected static void applyDecorators() {
-    for (IShape shape : SelectedShapesList.shapeList) {
-      IDraw newBehavior = createDecorator(shape.getShapeType(), shape.getDrawBehavior());
-      shape.setDrawBehavior(newBehavior);
-    }
+  protected static void applyDecorator(IShape shape) {
+    IDraw newBehavior = createDecorator(shape.getShapeType(), shape.getDrawBehavior());
+    shape.setDrawBehavior(newBehavior);
   }
 
-  protected static void removeDecorators() {
-    for (IShape shape : SelectedShapesList.shapeList) {
-      IDraw oldBehavior = ((IDrawSelectionDecorator)shape.getDrawBehavior()).getOriginalDrawBehavior();
-      shape.setDrawBehavior(oldBehavior);
-    }
+  protected static void removeDecorator(IShape shape) {
+    IDraw oldBehavior = ((IDrawSelectionDecorator)shape.getDrawBehavior()).getOriginalDrawBehavior();
+    shape.setDrawBehavior(oldBehavior);
   }
 
   protected static IDraw createDecorator(ShapeType shapeType, IDraw drawBehavior) {
@@ -91,7 +86,6 @@ public class SelectShapesCommand implements ICommand {
   }
 
   protected static void emptySelectedShapesList() {
-    removeDecorators();
     SelectedShapesList.clear();
   }
 

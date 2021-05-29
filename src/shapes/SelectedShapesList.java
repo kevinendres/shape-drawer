@@ -9,11 +9,18 @@ public class SelectedShapesList {
 
   public static void add(IShape shape) {
     shapeList.add(shape);
+    SelectShapesCommand.applyDecorator(shape);
   }
 
-  public static void remove(IShape shape) { shapeList.remove(shape); }
+  public static void remove(IShape shape) {
+    shapeList.remove(shape);
+    SelectShapesCommand.removeDecorator(shape);
+  }
 
   public static void clear() {
+    for (IShape shape : shapeList) {
+      SelectShapesCommand.removeDecorator(shape);
+    }
     shapeList.clear();
   }
 

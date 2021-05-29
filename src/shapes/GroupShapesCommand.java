@@ -9,6 +9,7 @@ import shapes.interfaces.IShape;
 
 public class GroupShapesCommand implements IUndoable {
   private List<IShape> groupedShapes = new ArrayList<>();
+  private GroupShapeComposite group;
 
   public GroupShapesCommand() {
   }
@@ -20,7 +21,7 @@ public class GroupShapesCommand implements IUndoable {
   }
 
   private void groupShapes() {
-    GroupShapeComposite group = new GroupShapeComposite();
+    group = new GroupShapeComposite();
     for (IShape shape : SelectedShapesList.shapeList) {
       groupedShapes.add(shape);
       group.addChild(shape);
@@ -30,17 +31,24 @@ public class GroupShapesCommand implements IUndoable {
     group.setHeightAndWidth();
     SelectShapesCommand.emptySelectedShapesList();
     SelectedShapesList.add(group);
-    SelectShapesCommand.applyDecorators();
     ShapeList.add(group);
   }
 
   @Override
   public void undo() {
-
+    for (IShape shape : groupedShapes) {
+      ShapeList.add(shape);
+      SelectedShapesList.add(shape);
+    }
+    ShapeList.remove(group);
   }
 
   @Override
   public void redo() {
-
+    for (IShape shape : groupedShapes) {
+      ShapeList.remove(shape);
+      SelectedShapesList.remove(shape);
+    }
+    ShapeList.add(group);
   }
 }
