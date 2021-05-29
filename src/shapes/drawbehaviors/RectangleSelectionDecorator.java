@@ -12,7 +12,7 @@ import shapes.interfaces.IShadingTypeStrategy;
 import view.interfaces.PaintCanvasBase;
 
 public class RectangleSelectionDecorator implements IDrawSelectionDecorator {
-  private final IDraw originalDrawBehavior;
+  protected final IDraw originalDrawBehavior;
 
   public RectangleSelectionDecorator(IDraw originalDrawBehavior) {
     this.originalDrawBehavior = originalDrawBehavior;
@@ -32,5 +32,9 @@ public class RectangleSelectionDecorator implements IDrawSelectionDecorator {
     g2d.setStroke(stroke);
     g2d.setColor(Color.BLACK);
     g2d.drawRect(upperLeft.x - 5, upperLeft.y - 5, width + 10, height + 10);
+  }
+
+  public IDraw getOriginalDrawBehavior() {
+    return this.originalDrawBehavior;
   }
 }

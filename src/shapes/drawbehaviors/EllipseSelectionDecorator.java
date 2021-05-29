@@ -37,4 +37,8 @@ public class EllipseSelectionDecorator implements IDrawSelectionDecorator {
     Shape ellipse = new Float(upperLeft.x - 5, upperLeft.y - 5, width + 10, height + 10);
     g2d.draw(ellipse);
   }
+
+  public IDraw getOriginalDrawBehavior() {
+    return this.originalDrawBehavior;
+  }
 }

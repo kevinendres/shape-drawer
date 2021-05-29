@@ -1,20 +1,22 @@
 package shapes;
 
+import java.util.ArrayList;
+import java.util.List;
 import model.interact.CommandHistory;
 import model.interact.ICommand;
 import model.interact.IUndoable;
 import shapes.interfaces.IShape;
 
-public class GroupShapesCommand implements ICommand, IUndoable {
+public class GroupShapesCommand implements IUndoable {
+  private List<IShape> groupedShapes = new ArrayList<>();
 
   public GroupShapesCommand() {
-    run();
   }
 
-  @Override
-  public void run() {
-    groupShapes();
-    CommandHistory.add(this);
+  public static void run() {
+    GroupShapesCommand groupShapesCommand = new GroupShapesCommand();
+    groupShapesCommand.groupShapes();
+    CommandHistory.add(groupShapesCommand);
   }
 
   private void groupShapes() {

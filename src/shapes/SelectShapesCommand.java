@@ -10,6 +10,7 @@ import shapes.drawbehaviors.EllipseSelectionDecorator;
 import shapes.drawbehaviors.RectangleSelectionDecorator;
 import shapes.drawbehaviors.TriangleSelectionDecorator;
 import shapes.interfaces.IDraw;
+import shapes.interfaces.IDrawSelectionDecorator;
 import shapes.interfaces.IShape;
 
 public class SelectShapesCommand implements ICommand {
@@ -39,7 +40,7 @@ public class SelectShapesCommand implements ICommand {
     }
   }
 
-  private void applyDecorators() {
+  protected void applyDecorators() {
     for (IShape shape : SelectedShapesList.shapeList) {
       ((Shape)shape).drawBehavior = createDecorator(((Shape)shape).shapeType, ((Shape)shape).drawBehavior);
     }
@@ -47,7 +48,7 @@ public class SelectShapesCommand implements ICommand {
 
   private void removeDecorators() {
     for (IShape shape : SelectedShapesList.shapeList) {
-      ((Shape)shape).drawBehavior = CreateShapeCommand.createDrawBehavior(((Shape)shape).shapeType);
+      ((Shape)shape).drawBehavior = ((IDrawSelectionDecorator)((Shape)shape).drawBehavior).getOriginalDrawBehavior();
     }
   }
 

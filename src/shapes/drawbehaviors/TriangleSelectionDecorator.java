@@ -12,7 +12,7 @@ import shapes.interfaces.IShadingTypeStrategy;
 import view.interfaces.PaintCanvasBase;
 
 public class TriangleSelectionDecorator implements IDrawSelectionDecorator {
-  private final IDraw originalDrawBehavior;
+  protected final IDraw originalDrawBehavior;
 
   public TriangleSelectionDecorator(IDraw originalDrawBehavior) {
     this.originalDrawBehavior = originalDrawBehavior;
@@ -33,5 +33,9 @@ public class TriangleSelectionDecorator implements IDrawSelectionDecorator {
     g2d.setColor(Color.BLACK);
     g2d.drawPolygon(new int[] {upperLeft.x - 3, upperLeft.x - 3, upperLeft.x + width + 9}, new int[] {upperLeft.y - 6,
         upperLeft.y + height + 3, upperLeft.y + height + 3}, 3);
+  }
+
+  public IDraw getOriginalDrawBehavior() {
+    return this.originalDrawBehavior;
   }
 }
