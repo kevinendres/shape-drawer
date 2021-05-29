@@ -6,10 +6,7 @@ import model.Point;
 import model.interact.CommandHistory;
 import model.interact.ICommand;
 import model.interact.IUndoable;
-import shapes.Shape;
-import shapes.ShapeDrawer;
 import shapes.interfaces.IShape;
-import shapes.SelectedShapesList;
 
 public class MoveShapesCommand implements ICommand, IUndoable {
   private Point pressPoint;
@@ -27,21 +24,11 @@ public class MoveShapesCommand implements ICommand, IUndoable {
   @Override
   public void run() {
     for (IShape shape : SelectedShapesList.shapeList) {
-      transform((Shape)shape);
+      ((Shape) shape).transform(this.deltaX, this.deltaY);
       this.movedShapesList.add(shape);
     }
     ShapeDrawer.drawAllShapes();
     CommandHistory.add(this);
-  }
-
-  private void transform(Shape shape) {
-    shape.upperLeft.x += deltaX;
-    shape.upperLeft.y += deltaY;
-  }
-
-  private void untransform(Shape shape) {
-    shape.upperLeft.x -= deltaX;
-    shape.upperLeft.y -= deltaY;
   }
 
   private int computeDeltaX() {
@@ -55,7 +42,7 @@ public class MoveShapesCommand implements ICommand, IUndoable {
   @Override
   public void undo() {
     for (IShape shape : this.movedShapesList) {
-      untransform((Shape)shape);
+      ((Shape) shape).untransform(this.deltaX, this.deltaY);
     }
     ShapeDrawer.drawAllShapes();
   }
@@ -63,7 +50,7 @@ public class MoveShapesCommand implements ICommand, IUndoable {
   @Override
   public void redo() {
     for (IShape shape : this.movedShapesList) {
-      transform((Shape)shape);
+      ((Shape) shape).transform(this.deltaX, this.deltaY);
     }
     ShapeDrawer.drawAllShapes();
   }

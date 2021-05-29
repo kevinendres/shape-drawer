@@ -55,4 +55,14 @@ public class Shape implements IShape {
   protected static int getWidth(Point pressPoint, Point releasePoint) {
     return abs(releasePoint.x - pressPoint.x);
   }
+
+  protected void transform(int deltaX, int deltaY) {
+    this.upperLeft.x += deltaX;
+    this.upperLeft.y += deltaY;
+  }
+
+  protected void untransform(int deltaX, int deltaY) {
+    this.upperLeft.x -= deltaX;
+    this.upperLeft.y -= deltaY;
+  }
 }

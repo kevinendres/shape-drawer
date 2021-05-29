@@ -3,12 +3,19 @@ package shapes;
 import java.util.ArrayList;
 import java.util.List;
 import model.Point;
+import model.ShapeColor;
+import model.ShapeType;
+import shapes.interfaces.IDraw;
+import shapes.interfaces.IShadingTypeStrategy;
 import shapes.interfaces.IShape;
 import view.interfaces.PaintCanvasBase;
 
 public class GroupShapeComposite implements IShape {
   private List<IShape> children = new ArrayList<>();
   protected Point upperLeft;
+  protected ShapeType shapeType = ShapeType.RECTANGLE;
+  protected IDraw drawBehavior = NullDrawObject.getInstance();
+  protected IShadingTypeStrategy shadingStrategy = NullShadingStrategy.getInstance();
   protected int height;
   protected int width;
 
@@ -18,8 +25,25 @@ public class GroupShapeComposite implements IShape {
 
   @Override
   public void draw(PaintCanvasBase paintCanvas) {
+    drawBehavior.draw(paintCanvas, upperLeft, width, height, ShapeColor.BLACK, ShapeColor.BLACK, shadingStrategy);
     for (IShape child : children) {
       child.draw(paintCanvas);
+    }
+  }
+
+  public void transform(int deltaX, int deltaY) {
+    this.upperLeft.x += deltaX;
+    this.upperLeft.y += deltaY;
+    for (IShape shape : children) {
+      ((Shape)shape).transform(deltaX, deltaY);
+    }
+  }
+
+  public void untransform(int deltaX, int deltaY) {
+    this.upperLeft.x -= deltaX;
+    this.upperLeft.y -= deltaY;
+    for (IShape shape : children) {
+      ((Shape)shape).untransform(deltaX, deltaY);
     }
   }
 

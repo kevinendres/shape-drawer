@@ -24,7 +24,8 @@ public class GroupShapesCommand implements ICommand, IUndoable {
       SelectedShapesList.remove(shape);
       ShapeList.remove(shape);
     }
-    createGroupDrawBehavior(group);
+    group.setUpperLeft();
+    group.setHeightAndWidth();
     ShapeList.add(group);
     SelectedShapesList.add(group);
   }
