@@ -2,7 +2,6 @@ package shapes;
 
 import java.util.ArrayList;
 import java.util.List;
-import shapes.ShapeDrawer;
 import shapes.interfaces.IShape;
 
 public class ShapeList {

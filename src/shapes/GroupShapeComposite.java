@@ -17,8 +17,8 @@ public class GroupShapeComposite implements IShape {
   protected ShapeType shapeType = ShapeType.RECTANGLE;
   protected IDraw drawBehavior = NullDrawObject.getInstance();
   protected IShadingTypeStrategy shadingStrategy = NullShadingStrategy.getInstance();
-  protected int height;
-  protected int width;
+  protected int height = 0;
+  protected int width = 0;
 
   public GroupShapeComposite() {
 
@@ -46,8 +46,8 @@ public class GroupShapeComposite implements IShape {
   }
 
   protected void setUpperLeft() {
-    this.upperLeft.x = 1920;
-    this.upperLeft.y = 1080;
+    this.upperLeft.x = 2560;
+    this.upperLeft.y = 1600;
     for (IShape child : children) {
       if (child.getUpperLeft().x < this.upperLeft.x) {
         this.upperLeft.x = child.getUpperLeft().x;
@@ -59,17 +59,14 @@ public class GroupShapeComposite implements IShape {
   }
 
   protected void setHeightAndWidth() {
-    Point bottomRight = new Point();
-    bottomRight.x = this.upperLeft.x;
-    bottomRight.y = this.upperLeft.y;
     for (IShape child : children) {
-      if (child.getUpperLeft().x > bottomRight.x) {
-        bottomRight.x = child.getUpperLeft().x;
-        this.width = bottomRight.x + child.getWidth() - upperLeft.x;
+      int childWidth = child.getUpperLeft().x + child.getWidth() - upperLeft.x;
+      int childHeight = child.getUpperLeft().y + child.getHeight() - upperLeft.y;
+      if (childWidth > this.width) {
+        this.width = childWidth;
       }
-      if (child.getUpperLeft().y > bottomRight.y) {
-        bottomRight.y = child.getUpperLeft().y;
-        this.height = bottomRight.y + child.getHeight() - upperLeft.y;
+      if (childHeight > this.height) {
+        this.height = childHeight;
       }
     }
   }

@@ -11,7 +11,7 @@ public class ShapeDrawer {
   private static void clearCanvas() {
     Graphics2D g2d = paintCanvas.getGraphics2D();
     g2d.setColor(Color.WHITE);
-    g2d.fillRect(0,0,1920,1080);
+    g2d.fillRect(0,0,2560,1600);
   }
 
   public static void drawAllShapes() {
