@@ -38,9 +38,11 @@ public class UngroupShapesCommand implements IUndoable {
 
   @Override
   public void undo() {
-    for (IShape shape : ungroupedShapes) {
-      SelectedShapesList.remove(shape);
-      ShapeList.remove(shape);
+    if (ungroupedShapes.size() != 0) {
+      for (IShape shape : ungroupedShapes) {
+        SelectedShapesList.remove(shape);
+        ShapeList.remove(shape);
+      }
     }
     if (group != null) {
       SelectedShapesList.add(group);
@@ -50,9 +52,11 @@ public class UngroupShapesCommand implements IUndoable {
 
   @Override
   public void redo() {
-    for (IShape child : ungroupedShapes) {
-      SelectedShapesList.add(child);
-      ShapeList.add(child);
+    if (ungroupedShapes.size() != 0) {
+      for (IShape child : ungroupedShapes) {
+        SelectedShapesList.add(child);
+        ShapeList.add(child);
+      }
     }
     if (group != null) {
       SelectedShapesList.remove(group);

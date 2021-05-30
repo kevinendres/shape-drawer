@@ -7,11 +7,12 @@ import model.interact.IUndoable;
 import shapes.interfaces.IShape;
 
 public class DeleteShapeCommand implements IUndoable {
-  private static final List<IShape> deletedShapeList = new ArrayList<>();
+  private final List<IShape> deletedShapeList = new ArrayList<>();
 
   public static void run() {
     DeleteShapeCommand command = new DeleteShapeCommand();
     command.deleteShapes();
+    CommandHistory.add(command);
   }
 
   public void deleteShapes() {
@@ -20,7 +21,6 @@ public class DeleteShapeCommand implements IUndoable {
       deletedShapeList.add(shape);
     }
     SelectedShapesList.clear();
-    CommandHistory.add(this);
   }
 
   @Override
