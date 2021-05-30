@@ -25,13 +25,15 @@ public class UngroupShapesCommand implements IUndoable {
         this.group = (GroupShapeComposite) shape;
       }
     }
-    for (IShape child : group.children) {
-      ShapeList.add(child);
-      SelectedShapesList.add(child);
-      ungroupedShapes.add(child);
+    if (group != null && group.children.size() != 0) {
+      for (IShape child : group.children) {
+        ShapeList.add(child);
+        SelectedShapesList.add(child);
+        ungroupedShapes.add(child);
+      }
+      ShapeList.remove(group);
+      SelectedShapesList.remove(group);
     }
-    ShapeList.remove(group);
-    SelectedShapesList.remove(group);
   }
 
   @Override
@@ -40,8 +42,10 @@ public class UngroupShapesCommand implements IUndoable {
       SelectedShapesList.remove(shape);
       ShapeList.remove(shape);
     }
-    SelectedShapesList.add(group);
-    ShapeList.add(group);
+    if (group != null) {
+      SelectedShapesList.add(group);
+      ShapeList.add(group);
+    }
   }
 
   @Override
@@ -50,8 +54,10 @@ public class UngroupShapesCommand implements IUndoable {
       SelectedShapesList.add(child);
       ShapeList.add(child);
     }
-    SelectedShapesList.remove(group);
-    ShapeList.remove(group);
+    if (group != null) {
+      SelectedShapesList.remove(group);
+      ShapeList.remove(group);
+    }
   }
 
 }

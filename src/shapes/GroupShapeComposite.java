@@ -109,6 +109,8 @@ public class GroupShapeComposite implements IShape, ICopyable {
       ICopyable temp = ((ICopyable) child).deepCopy();
       newGroup.addChild((IShape) temp);
     }
+    newGroup.setUpperLeft();
+    newGroup.setHeightAndWidth();
     return newGroup;
   }
 }
