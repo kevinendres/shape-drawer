@@ -7,12 +7,13 @@ import model.Point;
 import model.ShapeColor;
 import model.ShapeShadingType;
 import model.ShapeType;
+import shapes.interfaces.ICopyable;
 import shapes.interfaces.IDraw;
 import shapes.interfaces.IShadingTypeStrategy;
 import shapes.interfaces.IShape;
 import view.interfaces.PaintCanvasBase;
 
-public class Shape implements IShape {
+public class Shape implements IShape, ICopyable {
   protected Point upperLeft;
   protected int height;
   protected int width;
@@ -90,5 +91,14 @@ public class Shape implements IShape {
   @Override
   public ShapeType getShapeType() {
     return shapeType;
+  }
+
+  @Override
+  public ICopyable deepCopy() {
+    Point newUpperLeft = new Point(this.upperLeft.x + 7, this.upperLeft.y + 7);
+    IDraw newDrawBehavior = CreateShapeCommand.createDrawBehavior(this.shapeType);
+    IShadingTypeStrategy newShadingTypeStrategy = CreateShapeCommand.createShadingStrategy(this.shapeShadingType);
+    return new Shape(newUpperLeft, this.width, this.height, this.primaryColor, this.secondaryColor,
+        this.shapeShadingType, newShadingTypeStrategy, this.shapeType, newDrawBehavior);
   }
 }

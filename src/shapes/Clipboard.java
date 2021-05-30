@@ -2,12 +2,13 @@ package shapes;
 
 import java.util.ArrayList;
 import java.util.List;
+import shapes.interfaces.ICopyable;
 import shapes.interfaces.IShape;
 
 public class Clipboard {
-  public static final List<IShape> clipboard = new ArrayList<>();
+  public static final List<ICopyable> clipboard = new ArrayList<>();
 
-  public static void add(IShape shape) {
+  public static void add(ICopyable shape) {
     clipboard.add(shape);
   }
 

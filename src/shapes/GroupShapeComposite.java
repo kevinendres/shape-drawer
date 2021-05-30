@@ -6,12 +6,13 @@ import model.Point;
 import model.ShapeColor;
 import model.ShapeType;
 import shapes.drawbehaviors.RectangleSelectionDecorator;
+import shapes.interfaces.ICopyable;
 import shapes.interfaces.IDraw;
 import shapes.interfaces.IShadingTypeStrategy;
 import shapes.interfaces.IShape;
 import view.interfaces.PaintCanvasBase;
 
-public class GroupShapeComposite implements IShape {
+public class GroupShapeComposite implements IShape, ICopyable {
   protected List<IShape> children = new ArrayList<>();
   protected Point upperLeft = new Point();
   protected ShapeType shapeType = ShapeType.RECTANGLE;
@@ -99,5 +100,15 @@ public class GroupShapeComposite implements IShape {
   @Override
   public ShapeType getShapeType() {
     return shapeType;
+  }
+
+  @Override
+  public ICopyable deepCopy() {
+    GroupShapeComposite newGroup = new GroupShapeComposite();
+    for (IShape child : children) {
+      ICopyable temp = ((ICopyable) child).deepCopy();
+      newGroup.addChild((IShape) temp);
+    }
+    return newGroup;
   }
 }
