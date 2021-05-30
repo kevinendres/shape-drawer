@@ -8,6 +8,7 @@ import shapes.interfaces.IShape;
 
 public class UngroupShapesCommand implements IUndoable {
   private List<IShape> ungroupedShapes = new ArrayList<>();
+  private GroupShapeComposite group;
 
   public UngroupShapesCommand() {
   }
@@ -21,27 +22,36 @@ public class UngroupShapesCommand implements IUndoable {
   private void ungroupShapes() {
     for (IShape shape : SelectedShapesList.shapeList) {
       if (shape instanceof GroupShapeComposite) {
-        for (IShape child : ((GroupShapeComposite) shape).children) {
-          ungroupedShapes.add(child);
-        }
-        ShapeList.remove(shape);
-        SelectedShapesList.remove(shape);
+        this.group = (GroupShapeComposite) shape;
       }
     }
-    for (IShape shape : ungroupedShapes) {
-      ShapeList.add(shape);
-      SelectedShapesList.add(shape);
+    for (IShape child : group.children) {
+      ShapeList.add(child);
+      SelectedShapesList.add(child);
+      ungroupedShapes.add(child);
     }
+    ShapeList.remove(group);
+    SelectedShapesList.remove(group);
   }
 
   @Override
   public void undo() {
-
+    for (IShape shape : ungroupedShapes) {
+      SelectedShapesList.remove(shape);
+      ShapeList.remove(shape);
+    }
+    SelectedShapesList.add(group);
+    ShapeList.add(group);
   }
 
   @Override
   public void redo() {
-
+    for (IShape child : ungroupedShapes) {
+      SelectedShapesList.add(child);
+      ShapeList.add(child);
+    }
+    SelectedShapesList.remove(group);
+    ShapeList.remove(group);
   }
 
 }
