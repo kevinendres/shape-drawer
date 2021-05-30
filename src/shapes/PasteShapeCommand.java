@@ -16,6 +16,7 @@ public class PasteShapeCommand implements IUndoable {
   public static void run() {
     PasteShapeCommand command = new PasteShapeCommand();
     command.pasteShapes();
+    CommandHistory.add(command);
   }
 
   public void pasteShapes() {
@@ -23,8 +24,8 @@ public class PasteShapeCommand implements IUndoable {
       IShape temp = (IShape) shape.deepCopy();
       pastedShapeList.add(temp);
       ShapeList.add(temp);
+      ((IShape)shape).transform(8,8);
     }
-    CommandHistory.add(this);
   }
 
   @Override

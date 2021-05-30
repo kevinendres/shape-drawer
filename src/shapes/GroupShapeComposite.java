@@ -5,7 +5,6 @@ import java.util.List;
 import model.Point;
 import model.ShapeColor;
 import model.ShapeType;
-import shapes.drawbehaviors.RectangleSelectionDecorator;
 import shapes.interfaces.ICopyable;
 import shapes.interfaces.IDraw;
 import shapes.interfaces.IShadingTypeStrategy;

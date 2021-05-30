@@ -95,7 +95,7 @@ public class Shape implements IShape, ICopyable {
 
   @Override
   public ICopyable deepCopy() {
-    Point newUpperLeft = new Point(this.upperLeft.x + 7, this.upperLeft.y + 7);
+    Point newUpperLeft = new Point(this.upperLeft.x + 4, this.upperLeft.y + 4);
     IDraw newDrawBehavior = CreateShapeCommand.createDrawBehavior(this.shapeType);
     IShadingTypeStrategy newShadingTypeStrategy = CreateShapeCommand.createShadingStrategy(this.shapeShadingType);
     return new Shape(newUpperLeft, this.width, this.height, this.primaryColor, this.secondaryColor,

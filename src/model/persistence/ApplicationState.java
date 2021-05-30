@@ -77,9 +77,9 @@ public class ApplicationState implements IApplicationState {
 
     private void setDefaults() {
         activeShapeType = ShapeType.RECTANGLE;
-        activePrimaryColor = ShapeColor.BLUE;
-        activeSecondaryColor = ShapeColor.GREEN;
-        activeShapeShadingType = ShapeShadingType.FILLED_IN;
+        activePrimaryColor = ShapeColor.DARK_GRAY;
+        activeSecondaryColor = ShapeColor.MAGENTA;
+        activeShapeShadingType = ShapeShadingType.OUTLINE_AND_FILLED_IN;
         activeMouseMode = MouseMode.DRAW;
     }
 }

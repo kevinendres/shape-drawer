@@ -40,7 +40,9 @@ public class UngroupShapesCommand implements IUndoable {
   public void undo() {
     if (ungroupedShapes.size() != 0) {
       for (IShape shape : ungroupedShapes) {
-        SelectedShapesList.remove(shape);
+        if (SelectedShapesList.shapeList.contains(shape)) {
+          SelectedShapesList.remove(shape);
+        }
         ShapeList.remove(shape);
       }
     }
