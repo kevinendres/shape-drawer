@@ -1,2 +1,2 @@
-# kendres-jpaint
-Final project for SE450 with Jeffrey Sharpe, SQ2021
+# Shape Drawer
+A shape drawing program written from scratch using design patterns.
